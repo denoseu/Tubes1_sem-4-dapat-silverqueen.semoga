@@ -36,14 +36,38 @@ class SuperSilverqueen(BaseLogic):
         bots = board.bots
         diamonds = board.diamonds
         # Check other bots position
+        # for bot in bots:
+        #     if bot != board_bot:
+        #         temp_distance = calculate_distance(bot.position, board_bot.position)
+        #         if temp_distance <= 1:
+        #             temp_delta_x = bot.position.x - board_bot.position.x
+        #             temp_delta_y = bot.position.y - board_bot.position.y
+        #             # If adjacent, move away
+        #             return -temp_delta_x, -temp_delta_y
         for bot in bots:
             if bot != board_bot:
                 temp_distance = calculate_distance(bot.position, board_bot.position)
                 if temp_distance <= 1:
                     temp_delta_x = bot.position.x - board_bot.position.x
                     temp_delta_y = bot.position.y - board_bot.position.y
-                    # If adjacent, move away
-                    return -temp_delta_x, -temp_delta_y
+                    # jika bersebelahan, lakukan pengecekan untuk menentukan arah gerakan
+                    if temp_delta_x == 0:  # berada di atas atau bawah
+                        # cek ada bot lawan di sebelah kanan atau kiri ato ngga
+                        for opponent_bot in bots:
+                            if opponent_bot != board_bot and opponent_bot != bot:
+                                if abs(opponent_bot.position.x - bot.position.x) == 1 and opponent_bot.position.y == bot.position.y:
+                                    # jika ada bot lawan di sebelah kanan atau kiri, arahkan untuk bergerak ke atas atau bawah
+                                    return 0, -temp_delta_y
+                    elif temp_delta_y == 0:  # berada di kanan atau kiri
+                        # cek ada bot lawan di atas atau bawah
+                        for opponent_bot in bots:
+                            if opponent_bot != board_bot and opponent_bot != bot:
+                                if abs(opponent_bot.position.y - bot.position.y) == 1 and opponent_bot.position.x == bot.position.x:
+                                    # jika ada bot lawan di atas atau bawah, arahkan untuk bergerak ke kanan atau kiri
+                                    return temp_delta_x, 0
+                    else:
+                        # jika tidak berada di atas, bawah, kiri, atau kanan, maka pilih arah yang berlawanan untuk menjauh
+                        return -temp_delta_x, -temp_delta_y
 
         # Analyze new state
         if props.diamonds == 5:
@@ -82,5 +106,5 @@ class SuperSilverqueen(BaseLogic):
                 if delta_x != 0:
                     delta_y = 0
                 else:
-                    delta_y = random.choice([-1, 1])
+                    delta_y = random.choice([-1, 0, 1]) # biar bisa vertikal
             return delta_x, delta_y

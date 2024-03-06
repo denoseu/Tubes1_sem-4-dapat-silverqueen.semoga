@@ -9,7 +9,8 @@ from game.logic.bot import RandomLogic
 from game.logic.bot1 import RandomDensu
 from game.logic.bot2 import RandomZizi
 from game.logic.bot3 import ByDistanceLogic
-from game.logic.bot_super_silverqueen import SuperSilverqueen
+from game.logic.bot_super_silverqueen import NormalSilverqueen
+from game.logic.super_silverqueen import SuperSilverqueen
 from game.util import *
 from game.logic.base import BaseLogic
 
@@ -23,6 +24,7 @@ CONTROLLERS = {
     "RandomDensu": RandomDensu,
     "RandomZizi": RandomZizi,
     "ByDistanceLogic": ByDistanceLogic,
+    "NormalSilverqueen": NormalSilverqueen,
     "SuperSilverqueen": SuperSilverqueen,
 }
 

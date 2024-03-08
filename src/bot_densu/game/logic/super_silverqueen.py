@@ -17,6 +17,7 @@ class SuperSilverqueen(BaseLogic):
         self.directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
         self.goal_position: Optional[Position] = None
         self.current_direction = 0
+        self.move_count = 0 
 
     def find_teleport_gameobject(self, board: Board) -> Optional[Position]:
         teleport_objects = [obj for obj in board.game_objects if obj.type == "TeleportGameObject"]
@@ -29,14 +30,14 @@ class SuperSilverqueen(BaseLogic):
         diamonds = board.diamonds
         if diamonds:
             if board_bot.properties.diamonds == 4:
-                # If current diamonds count is 4, try to find blue diamond
+                # Kalau diamonds sudah 4, cari diamond biru
                 blue_diamonds = [diamond for diamond in diamonds if diamond.properties.points != 2]
                 if blue_diamonds:
-                    nearest_diamond = min(blue_diamonds, key=lambda diamond: calculate_distance(diamond.position, board_bot.position))
+                    nearest_diamond = min(blue_diamonds, key=lambda diamond: abs(diamond.position.x - board_bot.position.x) + abs(diamond.position.y - board_bot.position.y))
                 else:
-                    nearest_diamond = min(diamonds, key=lambda diamond: calculate_distance(diamond.position, board_bot.position))
+                    nearest_diamond = min(diamonds, key=lambda diamond: abs(diamond.position.x - board_bot.position.x) + abs(diamond.position.y - board_bot.position.y))
             else:
-                nearest_diamond = min(diamonds, key=lambda diamond: calculate_distance(diamond.position, board_bot.position))
+                nearest_diamond = min(diamonds, key=lambda diamond: abs(diamond.position.x - board_bot.position.x) + abs(diamond.position.y - board_bot.position.y))
             self.goal_position = nearest_diamond.position
         else:
             # No diamonds found, roam around
@@ -100,13 +101,11 @@ class SuperSilverqueen(BaseLogic):
                 self.goal_position.x,
                 self.goal_position.y,
             )
-            if board_bot.position.x + delta_x == teleport_x and board_bot.position.y + delta_y == teleport_y:
-                if calculate_distance(self.goal_position, board_bot.position) > 8:
-                    return -delta_x, -delta_y
-                else:
-                    return delta_x, delta_y
-            if board_bot.position.x + delta_x == teleport_x1 and board_bot.position.y + delta_y == teleport_y1:
-                if calculate_distance(self.goal_position, board_bot.position) > 8:
+            board_x, board_y = board_bot.position.x, board_bot.position.y
+            if (board_x + delta_x == teleport_x and board_y + delta_y == teleport_y) or \
+            (board_x + delta_x == teleport_x1 and board_y + delta_y == teleport_y1):
+                distance = calculate_distance(self.goal_position, board_bot.position)
+                if distance > 8:
                     return -delta_x, -delta_y
                 else:
                     return delta_x, delta_y
@@ -124,10 +123,13 @@ class SuperSilverqueen(BaseLogic):
                     self.directions
                 )
 
+        self.move_count += 1
+        print("Move count:", self.move_count)
+
         if (0 <= board_bot.position.x + delta_x <= board.width) and (0 <= board_bot.position.y + delta_y <= board.width):
             return delta_x, delta_y
         else:
-            # Adjust movement to stay within board boundaries
+            # adjust movement biar tetap didalam board
             while (delta_x + board_bot.position.x > board.width) or (delta_x + board_bot.position.x < 0) or (delta_y + board_bot.position.y > board.width) or (delta_y + board_bot.position.y < 0):
                 delta_x = random.randint(-1, 1)
                 if delta_x != 0:

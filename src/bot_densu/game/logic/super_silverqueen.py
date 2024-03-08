@@ -105,6 +105,11 @@ class SuperSilverqueen(BaseLogic):
                     return -delta_x, -delta_y
                 else:
                     return delta_x, delta_y
+            if board_bot.position.x + delta_x == teleport_x1 and board_bot.position.y + delta_y == teleport_y1:
+                if calculate_distance(self.goal_position, board_bot.position) > 8:
+                    return -delta_x, -delta_y
+                else:
+                    return delta_x, delta_y
             print("current x:", current_position.x)
             print("current y:", current_position.y)
             print("goal x:", self.goal_position.x)

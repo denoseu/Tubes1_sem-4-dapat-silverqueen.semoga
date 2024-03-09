@@ -4,6 +4,8 @@ Denise Felicia Tiowanni 13522013 <br>
 Shazya Audrea Taufik 13522063 <br>
 Shulha 13522087 <br>
 
+![Diamonds](superqueen.gif)
+
 ## Implementasi Greedy
 Salah satu alternatif algoritma yang digunakan pada bot kami adalah algoritma greedy by distance, diamond, dan defence. Pendekatan algoritma ini pertama-tama mencari jarak bot dengan diamond-diamond pada board dan kemudian mengambil diamond terdekat dengan mengutamakan pengambilan diamond merah dibanding biru apabila jarak antara bot dengan diamond merah lebih dekat dibanding biru. Selanjutnya, algoritma juga menghitung jarak bot dengan bot lain sehingga apabila posisi mereka adjacent, bot akan menghindar sehingga tidak terjadi tabrakan.
 

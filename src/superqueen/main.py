@@ -5,7 +5,6 @@ from colorama import Back, Fore, Style, init
 from game.api import Api
 from game.board_handler import BoardHandler
 from game.bot_handler import BotHandler
-from game.logic.bot import RandomLogic
 from game.logic.bot_super_silverqueen import SuperSilverqueen
 from game.util import *
 from game.logic.base import BaseLogic
@@ -16,7 +15,6 @@ BASE_URL = "http://localhost:8082/api"
 # BASE_URL = "http://192.168.1.26:8082/api"
 DEFAULT_BOARD_ID = 1
 CONTROLLERS = {
-    "Random": RandomLogic,
     "SuperSilverqueen": SuperSilverqueen,
 }
 

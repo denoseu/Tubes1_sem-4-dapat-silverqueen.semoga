@@ -6,11 +6,7 @@ from game.api import Api
 from game.board_handler import BoardHandler
 from game.bot_handler import BotHandler
 from game.logic.bot import RandomLogic
-from game.logic.bot1 import RandomDensu
-from game.logic.bot2 import RandomZizi
-from game.logic.bot3 import ByDistanceLogic
-from game.logic.bot_super_silverqueen import NormalSilverqueen
-from game.logic.super_silverqueen import SuperSilverqueen
+from game.logic.bot_super_silverqueen import SuperSilverqueen
 from game.util import *
 from game.logic.base import BaseLogic
 
@@ -21,10 +17,6 @@ BASE_URL = "http://localhost:8082/api"
 DEFAULT_BOARD_ID = 1
 CONTROLLERS = {
     "Random": RandomLogic,
-    "RandomDensu": RandomDensu,
-    "RandomZizi": RandomZizi,
-    "ByDistanceLogic": ByDistanceLogic,
-    "NormalSilverqueen": NormalSilverqueen,
     "SuperSilverqueen": SuperSilverqueen,
 }
 

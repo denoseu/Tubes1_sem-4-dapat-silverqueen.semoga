@@ -18,7 +18,7 @@ Salah satu alternatif algoritma yang digunakan pada bot kami adalah algoritma gr
 │   ├── superqueen
 │   │   ├── game
 │   │   │   ├── logic
-│   │   │   │   ├── super_silverqueen.py
+│   │   │   │   ├── bot_super_silverqueen.py
 │   │   │   ├── __init__.py
 │   │   │   ├── api.py
 │   │   │   ├── board_handler.py

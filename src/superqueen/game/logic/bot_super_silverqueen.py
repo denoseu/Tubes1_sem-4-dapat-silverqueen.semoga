@@ -109,8 +109,6 @@ class SuperSilverqueen(BaseLogic):
                 distance = calculate_distance(self.goal_position, board_bot.position)
                 if distance < 8 and (0 <= board_x + delta_x <= 14) and (0 <=  board_y + delta_y <= 14):
                     return -delta_x, -delta_y
-                else:
-                    return delta_x, delta_y
             print("current x:", current_position.x)
             print("current y:", current_position.y)
             print("goal x:", self.goal_position.x)
